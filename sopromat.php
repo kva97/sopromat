@@ -3,6 +3,7 @@
 	<head lang = "en">
         <meta charset = "UCF-8">
 		<title>Сопромат</title>
+		<link rel = "shortcut icon" href="./ico.png" type="image/png">
         <link rel = "stylesheet" href = "./sopromat.css">
 	</head>
 	<body style = 'margin: 0px;'>

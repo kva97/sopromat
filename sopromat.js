@@ -502,7 +502,7 @@ function force_diagram(){
         }
         x_forces.push(x_force);
     }
-    for(let i = 0; i <= x2 - x1; i++){
+    for(let i = 0; i < x2 - x1; i++){
         if(~~i % ~~((x2 - x1) / 50) == 0){
             balk.draw_line(i + x1, force_y, i + x1, force_y - Number(x_forces[i] * 100 / Math.abs(max(x_forces))), 0.5);
         }   
@@ -514,6 +514,10 @@ function force_diagram(){
         else coord -= 1;
         text = x_forces[~~coord].toFixed(2).toString();
         balk.draw_text(coord + x1, coord + x1 + 8 * text.length, force_y - Number(x_forces[~~coord] * 100 / Math.abs(max(x_forces))) + text_indent(x_forces, coord), text);
+        if(coord > 0 && coord < x2 - x1 - 1){
+            balk.draw_line(coord + x1 - 1, force_y - Number(x_forces[~~coord - 2] * 100 / Math.abs(max(x_forces))),
+                coord + x1 - 1, force_y - Number(x_forces[~~coord + 2] * 100 / Math.abs(max(x_forces))), 2);
+        }
     }
     balk.draw_text(x1 - 6, 0, force_y + 5, 'Q', 'black', 22);
     balk.draw_text(x1, 24, force_y + 10, 'y', 'black', 14);
@@ -559,6 +563,10 @@ function moment_diagram(){
         }
         else text = x_moments[~~coord].toFixed(2).toString();
         balk.draw_text(coord + x1, coord + x1 + 8 * text.length, moment_y + Number(x_moments[~~coord] * 100 / Math.abs(max(x_moments))) - text_indent(x_moments, coord) + 10, text);
+        if(coord > 0 && coord < x2 - x1 - 1){
+            balk.draw_line(coord + x1, moment_y + Number(x_moments[~~coord - 1] * 100 / Math.abs(max(x_moments))),
+                coord + x1, moment_y + Number(x_moments[~~coord + 1] * 100 / Math.abs(max(x_moments))), 2);
+        }
     }
     if(Math.abs(max(x_moments)) > Math.abs(max(moment.values)) || moment.values.length == 0){
         if(x_moments.indexOf(max(x_moments)) == -1) Max = -max(x_moments);
